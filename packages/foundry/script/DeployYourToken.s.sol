@@ -17,13 +17,20 @@ contract DeployYourToken is ScaffoldETHDeploy {
      * - If true: deploy Vendor and seed it with the token balance
      * - If false: send tokens to your frontend address (or deployer if unset)
      */
-    bool constant SEND_TOKENS_TO_VENDOR = false; // Don't switch until Checkpoint 2!
+    bool constant SEND_TOKENS_TO_VENDOR = true; // Don't switch until Checkpoint 2!
 
     function run() external ScaffoldEthDeployerRunner {
         YourToken yourToken = new YourToken();
-        console.logString(string.concat("YourToken deployed at: ", vm.toString(address(yourToken))));
+        console.logString(
+            string.concat(
+                "YourToken deployed at: ",
+                vm.toString(address(yourToken))
+            )
+        );
 
-        address recipient = FRONTEND_ADDRESS != address(0) ? FRONTEND_ADDRESS : msg.sender;
+        address recipient = FRONTEND_ADDRESS != address(0)
+            ? FRONTEND_ADDRESS
+            : msg.sender;
 
         if (!SEND_TOKENS_TO_VENDOR) {
             // Send the entire initial supply to the wallet you use in the UI.
@@ -36,7 +43,9 @@ contract DeployYourToken is ScaffoldETHDeploy {
 
         // Deploy Vendor and seed it with tokens
         Vendor vendor = new Vendor(address(yourToken));
-        console.logString(string.concat("Vendor deployed at: ", vm.toString(address(vendor))));
+        console.logString(
+            string.concat("Vendor deployed at: ", vm.toString(address(vendor)))
+        );
 
         yourToken.transfer(address(vendor), 1000 ether);
 
