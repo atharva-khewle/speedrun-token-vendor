@@ -1,3 +1,11 @@
+# Token Vendor Challenge
+
+**Live demo:** https://token3vendor.vercel.app
+
+My solution to the [SpeedRunEthereum](https://speedrunethereum.com) Token Vendor Challenge challenge, built on Scaffold-ETH 2.
+
+---
+
 # 🏗 Scaffold-ETH 2
 
 <h4 align="center">
