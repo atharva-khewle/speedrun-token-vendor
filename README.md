@@ -10,4 +10,22 @@ An ERC20 token with a vending-machine contract to buy and sell it for ETH.
 
 ![screenshot](https://github.com/scaffold-eth/se-2-challenges/assets/55535804/7669cc68-e942-4630-95c8-91cd21af5ba0)
 
+## Tech and flow
+
+- **Solidity + OpenZeppelin** (`ERC20`, `Ownable`): `YourToken` is a fixed-supply token. `Vendor` buys and sells it at 100 tokens per ETH.
+- **ERC20 approve pattern**: selling needs `approve` then `transferFrom`.
+- **Foundry**: build, test, deploy to Sepolia.
+- **Next.js + wagmi/viem + RainbowKit**: buy, approve, sell, and event list.
+
+```mermaid
+flowchart LR
+    U[User] -->|buyTokens: ETH| V[Vendor]
+    V -->|transfer tokens| U
+    U -->|approve Vendor| T[YourToken ERC20]
+    U -->|sellTokens amount| V
+    V -->|transferFrom user| T
+    V -->|send ETH| U
+    O[Owner] -->|withdraw| V
+```
+
 Part of [SpeedRunEthereum](https://speedrunethereum.com).
